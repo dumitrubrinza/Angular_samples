@@ -5,7 +5,54 @@
   <script src="../scripts/angular.min.js"></script>
   <link href="css/custom.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-app >
+<body ng-app ng-init="posts= [
+					            { title : 'India - Tiger population sees 30% increase.',
+					              link : 'http://www.bbc.com/news/world-asia-30896028',
+					              username : 'jbloggs',
+					              upvotes : 10
+					            },
+					            { title : 'Google Nears $1B Investment in SpaceX',
+					              link : null,
+					              username : 'notme',
+					              upvotes : 5
+					            },
+					           { title : 'The button that is not.',
+					              link : 'http://blog.nuclearsecrecy.com/2014/12/15/button-isnt/',
+					              username : 'notme',
+					              upvotes : 12
+					            },
+					            { title : 'Coinbase Raises $75M from DFJ Growth, USAA, and More',
+					              link : 'http://blog.coinbase.com/post/108642362357/coinbase-raises-75m-from-dfj-growth-usaa-nyse',
+					              username : 'psmith',
+					              upvotes : 2
+					            }
+           					 ]">
+
+		<div class="container" >
+	      <div class="row">
+	        <div class="col-md-8 col-md-offset-2">
+	            <div class="page-header">
+	              <h1>Hacker News</h1>
+	            </div>
+	            <div ng-repeat="post in posts | orderBy:'+upvotes'">
+	                <span class="glyphicon glyphicon-thumbs-up"
+	                     ng-click=""></span>
+	                     {{post.upvotes}}
+	                     <span class="main-text ">
+	                     <a ng-show="post.link != null" href="{{post.link}}">
+	                        {{post.title}}
+	                     </a>
+	                     <span ng-hide="post.link != null">
+	                       {{post.title}}
+	                     </span>
+	                    <span>
+	                        <a href="">Comments</a>
+	                    </span>
+	                </span>
+	            </div> 
+	        </div>
+	      </div>
+	    </div>
 
 </body>
 </html>
