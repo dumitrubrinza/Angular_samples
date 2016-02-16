@@ -46,19 +46,20 @@
         imageUrl: 'img/phones/dell-venue.0.jpg', 
         snippet: 'The Dell Venue; Your Personal Express Lane to Everything'
     }   ]">
-<div class="container-fluid">
-  <div class="row">
-   <div class="col-md-10">
+    
+  <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-10">
 
-     <ul  class="phones">
-        <li ng-repeat="phone in phones" class="thumbnail">
-           <a href="" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
-           <a href="">{{phone.name}}</a>
-           <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
+       <ul  class="phones">
+          <li ng-repeat="phone in phones" class="thumbnail">
+             <a href="" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+             <a href="">{{phone.name}}</a>
+             <p>{{phone.snippet}}</p>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 </body>
 </html>
