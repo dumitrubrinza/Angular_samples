@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app>
+<head>
+   <link href="../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../styles/custom.css" rel="stylesheet" />
+    <script src="../support/angular.js"></script>
+</head>
+<body>
+<div class="container" >
+	<div ng-controller="SimpleController">
+ 	<div class="row">
+    <div class="col-sm-4 col">
+       <div ng-include="'./partials/add-customer.html'"/>
+        </div>
+	</div>
+    <div class="col-sm-4">
+    	<h3>Find Customer - by index</h3>
+        <input type="text" ng-model="customerNo" placeholder="Customer No.">
+        <div ng-include="'./partials/verbose-customer.html'">
+        </div>
+  	</div>
+    <div class="col-sm-4">       
+          <div ng-include="'./partials/list-customers.html'" >
+          </div>
+    </div>
+    </div>
+   </div>    
+</div>
+<script>
+    function SimpleController($scope) {
+    	$scope.newCustomer = {}
+        $scope.customers = [ 
+		   {name :'Dave', address: 'Waterford', balance: 2000, start_date: 1288323623006},
+		   {name :'Dana', address: 'Wexford', balance: 3000, start_date: 1288323643006},
+		   {name :'Fiona', address: 'Kilkenny', balance: 12000, start_date: 1299323623006}] 
+		$scope.addCustomer = function () {
+            $scope.customers.push({ name: $scope.newCustomer.name, address: $scope.newCustomer.address, start_date: new Date(), balance: $scope.newCustomer.balance })
+            $scope.newCustomer = {}
+        }
+        $scope.custNoInRange = function () {
+			return  $scope.customerNo != '' && 
+			        $scope.customerNo >=0 && 
+			        $scope.customerNo < $scope.customers.length
+        }
+	}
+    </script>
+</body>
+</html>

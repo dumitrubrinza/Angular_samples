@@ -1,0 +1,7 @@
+<div ng-show="custNoInRange()" >
+	<br>Name : {{customers[customerNo].name }}
+	<br>Start:  {{customers[customerNo].start_date | date }} ( {{customers[customerNo].start_date | date:'dd/MM/yyyy' }} or {{customers[customerNo].start_date | date:'EEE dd/MM/yy' }})
+	<br>Address: {{customers[customerNo].address | uppercase }}
+	<br>Balance :  <strong> {{ customers[customerNo].balance * 0.74| currency:'EUR$' }} 
+	</strong>
+</div> 

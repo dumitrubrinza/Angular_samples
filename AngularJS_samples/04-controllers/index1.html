@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app>
+<head>
+   <link href="../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../styles/custom.css" rel="stylesheet" />
+    <script src="../support/angular.js"></script>
+    <script>
+        function SimpleController($scope) {
+            $scope.names = ['Dave','Niall','Helen','Sheila']
+            $scope.addName = function () {
+                var match = false
+                $scope.names.forEach(function(element) {
+                       if ( element.toUpperCase() == $scope.newName.toUpperCase()) {
+                           match = true
+                       }
+                    })
+                if ( !match ) {
+                    // console.log('no match')
+                    $scope.names.push($scope.newName )
+                }
+                $scope.newName = ''
+            }
+        }
+    </script>
+</head>
+<body >
+    <div class="container" ng-controller="SimpleController">
+        <div class="row">
+        <div class="col-sm-6">
+       <h4  class="text-center">Add new Name</h4> 
+        <form class="form-inline" >
+          <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" ng-model="newName" 
+                     placeholder="Enter name">
+          </div>
+           <button class="btn btn-primary"  ng-click="addName()">Submit</button>
+          <!-- <input type="submit" class="btn btn-primary"  value="Submit"> -->
+        </form>
+        </div>
+          <div class="col-sm-6">
+            <h4>Names</h4> 
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="name in names">{{name}}</li>
+            </ul>
+          </div> 
+        </div>
+    </div>
+</body>
+</html>

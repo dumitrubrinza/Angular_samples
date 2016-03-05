@@ -1,0 +1,22 @@
+<div class="container" >
+  <div class="row">
+     <div class="col-sm-6 col-sm-offset-2">
+     <h3>Products - Name search</h3> 
+    <input type="text" ng-model="search.name" placeholder="Product Name">
+    <table class="table table-bordered">
+        <tr><th>Name</th><th>Price (EUR$)</th><th>Qty.</th></tr> 
+              <tr ng-repeat="product in products | filter:search" >
+                <td>
+                  {{product.name}}
+                </td>
+                <td>
+                  {{product.price | currency:"" }}
+                </td>
+                <td>
+                  {{product.quantity }}
+                </td>
+         </tr>
+    </table>
+  </div>
+   </div> 
+ </div>

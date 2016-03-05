@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="demoApp">
+<head>
+    <link href="../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../styles/custom.css" rel="stylesheet" />
+</head>
+<body >
+  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container" >
+      
+          <ul class="nav navbar-nav pull-right" >
+              <li ><a href="#/customers">Customers</a></li>
+              <li ><a href="#/products">Products</a></li>
+          </ul>
+        </div>
+  </nav>
+
+ <div class="view" ng-view></div>
+  
+ <script src="../support/angular.js"></script>
+ <script src="../support/angular-route.js"></script>  
+ <script src="./app.js"></script>
+</body>
+</html>
