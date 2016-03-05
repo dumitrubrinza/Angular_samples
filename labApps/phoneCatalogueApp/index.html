@@ -49,10 +49,21 @@
     
   <div class="container-fluid">
     <div class="row">
+       
+        <div class="col-md-2">
+          <!--START NEW-->
+          Search: <input ng-model="query">
+          Sort by:
+          <select ng-model="orderProp">
+            <option value="name">Alphabetical</option>
+            <option value="age">Newest</option>
+          </select>
+        </div>
+
      <div class="col-md-10">
 
        <ul  class="phones">
-          <li ng-repeat="phone in phones" class="thumbnail">
+          <li ng-repeat="phone in phones | filter:{name: query } | orderBy:orderProp" class="thumbnail">
              <a href="" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
              <a href="">{{phone.name}}</a>
              <p>{{phone.snippet}}</p>

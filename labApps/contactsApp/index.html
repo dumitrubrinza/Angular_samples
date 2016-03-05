@@ -1,82 +1,18 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="contactsApp" > 
 <head>
   <meta charset="utf-8">
   <title>Contacts</title>
 
     <script type="text/javascript" src="../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../scripts/angular-route.min.js"></script>
+    
     <link href="../styles/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet" type="text/css">
-
-</head>
-<body ng-init="contacts=[
-        {
-            name: 'Contact 1',
-            address: '1 Test St',
-            phone_number: '087-123456'
-        },
-        {
-            name: 'Contact 2',
-            address: '2 Test St',
-            phone_number: '087-654321'
-        },
-        {
-            name: 'Contact 3',
-            address: '1 Main St',
-            phone_number: '086-123456',
-            state : 'deleted'
-        },
-          {
-            name: 'Contact 4',
-            address: '2 Main St',
-            phone_number: '086-654321'
-        }
-    ]"> 
-
-    <h1>Contact list</h1>
-            <div>   
-              <div >
-                <table class="table table-bordered">
-                  <thead>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone Number</th>
-                    <th></th>
-                    <th ng-if="contacts.length > 0"></th>
-                  </thead>
-
-                <tbody ng-repeat="contact in contacts" ng-switch="contact.state">
-
-                    <!-- Deleted Mode Template -->
-			        <tr class="danger" ng-switch-when="deleted">
-			          <td>{{contact.name}}</td>
-			          <td>{{contact.address}}</td>
-			          <td>{{contact.phone_number}}</td>
-			          <td>
-			            <input type="button" class="btn btn-danger" ng-click="" value="Confirm" />
-			          </td>
-			          <td>
-			            <input type="button" class="btn btn-success" ng-click="" value="Undo"/>
-			          </td>
-			        </tr>
-
-			        <!-- Normal Mode Template -->
-			        <tr ng-switch-default>
-			          <td>{{contact.name}} </td>
-			          <td>{{contact.address}}</td>
-			          <td>{{contact.phone_number}}</td>
-			          <td>
-			            <input type="button" class="btn btn-primary" ng-click="" value="Edit" />
-			          </td>
-			          <td>
-			            <input type="button" class="btn btn-danger" ng-click="" value="Delete"/>
-			          </td>
-			        </tr>
-			      </tbody>
-
-                </table>
-              </div>
-            </div>
-
+    </head>
+<body> 
+      <div ng-view ></div>
+    
+<script src="app.js"></script>
 </body>
 </html>

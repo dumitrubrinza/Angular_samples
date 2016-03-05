@@ -1,0 +1,60 @@
+<h1>Contact list</h1>
+            <div>   
+              <div>
+                <table class="table table-bordered">
+                  <thead>
+                    <th class="name" >Name</th>
+                    <th class="address">Address</th>
+                    <th class="phone">Phone Number</th>
+                    <th class="button1" ></th>
+                    <th class="button2" ng-if="contacts.length > 0"></th>
+                  </thead>
+
+                <tbody ng-repeat="contact in contacts" ng-switch="contact.state">
+                    <tr ng-switch-when="edit">
+                        <td>
+                            <input type="text" class="form-control" ng-model="contact.name" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" ng-model="contact.address" />
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" ng-model="contact.phone_number" />
+                              </td>
+                              <td>
+                                <input type="button" class="btn btn-success" ng-click="saveContact(contact)" value="Save" />
+                              </td>
+                              <td>
+                                <input type="button" class="btn btn-danger" ng-click="cancelEdit(contact);" value="Cancel" />
+                        </td>
+                    </tr>
+                    <!-- Deleted Mode Template -->
+			        <tr class="danger" ng-switch-when="deleted">
+			          <td>{{contact.name}}</td>
+			          <td>{{contact.address}}</td>
+			          <td>{{contact.phone_number}}</td>
+			          <td>
+			            <input type="button" class="btn btn-danger" ng-click="confirmDelete($index)" value="Confirm" />
+			          </td>
+			          <td>
+			            <input type="button" class="btn btn-success" ng-click="undoDelete(contact)" value="Undo"/>
+			          </td>
+			        </tr>
+
+			        <!-- Normal Mode Template -->
+			        <tr ng-switch-default>
+			          <td>{{contact.name}} </td>
+			          <td>{{contact.address}}</td>
+			          <td>{{contact.phone_number}}</td>
+			          <td>
+			            <input type="button" class="btn btn-primary" ng-click="editContact(contact)" value="Edit" />
+			          </td>
+			          <td>
+			            <input type="button" class="btn btn-danger" ng-click="deleteContact(contact)" value="Delete"/>
+			          </td>
+			        </tr>
+			      </tbody>
+
+                </table>
+              </div>
+            </div>
