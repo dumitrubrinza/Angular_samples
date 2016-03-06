@@ -1,76 +1,19 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="phoneCatApp" >
 <head>
   <meta charset="utf-8">
   <title>Phone Gallery</title>
      <script type="text/javascript" src="../scripts/angular.min.js"></script>
+     <script type="text/javascript" src="../scripts/angular-route.min.js"></script>
     <link href="../styles/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet" type="text/css">
 
 </head>
-<body ng-init="phones = [
-    {
-        age: 0,
-        name : 'Motorola XOOM\u2122 with Wi-Fi', 
-        imageUrl: 'img/phones/motorola-xoom-with-wi-fi.0.jpg', 
-        snippet : 'The Next, Next Generation\r\n\r\nExperience the future with Motorola XOOM with Wi-Fi, the first tablet powered by Android 3.0 (Honeycomb).'
-
-    },
-        {
-        age: 1 , 
-        name : 'MOTOROLA XOOM\u2122', 
-        imageUrl: 'img/phones/motorola-xoom.0.jpg', 
-        snippet : 'The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM, the first tablet powered by Android 3.0 (Honeycomb).'
-    },      
-    {
-        age : 2, 
-        name : 'MOTOROLA ATRIX\u2122 4G', 
-        imageUrl: 'img/phones/motorola-atrix-4g.0.jpg', 
-        snippet : 'MOTOROLA ATRIX 4G the most powerful smartphone.'
-    }, 
-    {
-        age: 3, 
-        imageUrl: 'img/phones/dell-streak-7.0.jpg', 
-         name : 'Dell Streak 7', 
-        snippet: 'Introducing Dell\u2122 Streak 7. Share photos, videos and movies together. It\u2019s small enough to carry around, big enough to gather around.'
-    }, 
-    {
-        age: 4, 
-        name: 'Samsung Gem\u2122', 
-        imageUrl: 'img/phones/samsung-gem.0.jpg', 
-        snippet: 'The Samsung Gem\u2122 brings you everything that you would expect and more from a touch display smart phone \u2013 more apps, more features and a more affordable price.'
-    }, 
-    {
-        age: 5, 
-        name: 'Dell Venue', 
-        imageUrl: 'img/phones/dell-venue.0.jpg', 
-        snippet: 'The Dell Venue; Your Personal Express Lane to Everything'
-    }   ]">
-    
-  <div class="container-fluid">
-    <div class="row">
-       
-        <div class="col-md-2">
-          <!--START NEW-->
-          Search: <input ng-model="query">
-          Sort by:
-          <select ng-model="orderProp">
-            <option value="name">Alphabetical</option>
-            <option value="age">Newest</option>
-          </select>
-        </div>
-
-     <div class="col-md-10">
-
-       <ul  class="phones">
-          <li ng-repeat="phone in phones | filter:{name: query } | orderBy:orderProp" class="thumbnail">
-             <a href="" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
-             <a href="">{{phone.name}}</a>
-             <p>{{phone.snippet}}</p>
-          </li>
-        </ul>
+ 
+ <body >
+      <div class="container-fluid">
+          <div ng-view ></div>         
       </div>
-    </div>
-  </div>
-</body>
+      <script src="app.js"></script>
+    </body>
 </html>
