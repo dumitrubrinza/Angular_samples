@@ -9,7 +9,7 @@
             templateUrl: 'partials/phone-list.html',
             controller: 'PhoneListCtrl'
           })
-           .when('/phones/:phoneId', {
+          .when('/phones/:phoneId', {
             templateUrl: 'partials/phone-detail.html',
             controller: 'PhoneDetailCtrl'
           })
@@ -31,11 +31,13 @@
          function($scope, $location, $routeParams, PhoneService) {
              PhoneService.getPhone($routeParams.phoneId)
                 .success(function(data) {
+                	console.log("success");
                    $scope.phone = data
                    $scope.img = $scope.phone.images[0]
                    })
                 .error(function(err) {
-                    $location.path('./pnones') 
+                	console.log("error");
+                    $location.path('./phones') 
                   })
              $scope.setImage = function(img) {
                   $scope.img = img
@@ -46,10 +48,11 @@
         var api = {
             getPhones : function() {
                 return $http.get('phones/phones.json')            
+            },
+            getPhone : function(id) {   
+                return $http.get('phones/' + id + '.json')
             }
-            getPhone : function(id) {  // NEW
-                     return $http.get('phones/' + id + '.json')
-                }
         }
         return api
     }])
+
