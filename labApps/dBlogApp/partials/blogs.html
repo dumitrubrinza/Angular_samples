@@ -1,0 +1,15 @@
+<div>
+    <ul class="list">
+	<li ng-repeat="article in articles | filter:{title: query }" ng-switch="article.state">
+      	<a href="#/article/{{article.id}}">
+
+      	 <p><h3>{{article.title}}</h3> </p> </a>
+	     
+         <p> {{article.data | cut:true:350: ' ... '}} <a href="#/article/{{article.id}}"> (see more)</a> </p>
+
+            <p><h4>{{article.by}} </h4></p> 
+	</li>
+    </ul>	         
+
+</div>
+

@@ -1,0 +1,49 @@
+/*.navbar{
+		margin-top: 20px;
+	}
+	
+
+
+.navbar-form {
+	padding-right: 150px;
+	padding-left: 150px;
+}
+
+.navbar-inverse {
+    position: fixed;
+    right: 0;
+    left: 0;
+} 
+ */
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+
+#footer {
+  height: 60px;
+  background-color: #313131;
+  margin-top:50px;
+  padding-top:20px;
+  padding-bottom:20px;
+ }
+
+
+.text-muted {
+	  color: #C1C0C0; 
+}
+
+.navbar-brand {
+    font-size: 38px;
+}
+.col-xs-12, .col-sm-6, .col-lg-8{
+	border-style: dotted;
+}
+.col-xs-6{
+	border-style: dotted;
+}
+
+ul.list{
+  list-style: none;
+}
