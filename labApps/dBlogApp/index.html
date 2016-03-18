@@ -4,17 +4,19 @@
   <meta charset="utf-8">
   <title>dBlogApp</title>
 
-    <script type="text/javascript" src="../scripts/angular.min.js"></script>
-    <script type="text/javascript" src="../scripts/angular-route.min.js"></script>
-   <!--<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-   <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>-->
- 
-    <link href="../styles/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+   <!-- <script type="text/javascript" src="../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../scripts/angular-route.min.js"></script>-->
+   <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+   <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+   <script type="text/javascript" src="bower_components/angular-messages/angular-messages.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+	<script type="text/javascript" src="bower_components/angular-underscore-module/angular-underscore-module.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <link href="../styles/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet" type="text/css">
+    
 </head>
  
 <body >
@@ -48,8 +50,9 @@
 
    <div ng-include="'./partials/footer.html'"/>
    </div>
-
+ 
 <script src="app.js"></script>
-        
+<script type="text/javascript" src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+
  </body>
 </html>

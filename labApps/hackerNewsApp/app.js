@@ -34,6 +34,7 @@ var hackerApp = angular.module('hackerNewsApp', ['ngRoute'])
 			          })
 			          $scope.newPost = { }
 			        }
+              console.log(" PostsController $scope.posts" + $scope.posts);
     }]) 
 
     hackerApp.controller('CommentsController', ['$scope',
