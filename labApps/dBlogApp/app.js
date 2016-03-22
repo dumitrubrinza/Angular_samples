@@ -17,34 +17,26 @@ var blogApp = angular.module('dBlogApp', ['ngRoute', 'ngMessages',  'angularUtil
           })
           .when('/new-article', {
             templateUrl: 'partials/new-article.html',
-            controller: 'ArticlesController'
+            controller: 'NewArtController'
           })
           .otherwise({
             redirectTo: '/'
           })
       }])
-/*
-    angular.module('ng').filter('cut', function () {
-        return function (value, wordwise, max, tail) {
-            if (!value) return '';
-
-            max = parseInt(max, 10);
-            if (!max) return value;
-            if (value.length <= max) return value;
-
-            value = value.substr(0, max);
-            if (wordwise) {
-                var lastspace = value.lastIndexOf(' ');
-                if (lastspace != -1) {
-                    value = value.substr(0, lastspace);
-                }
-            }
-
-            return value + (tail || ' …');
-        };
-    });
-
-*/
+/*     
+    .run(function($rootScope, $location) {
+      $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        if ($rootScope.loggedInUser == null) {
+          // no logged user, redirect to /login
+          if ( next.templateUrl === "partials/blogs.html") {
+          } else {
+            $location.path("/login");
+          }
+        }
+      });
+    })
+*/    
+ 
 
 blogApp.filter('cut', function(ArticleService) {
      return function (value, wordwise, max, tail) {
@@ -109,15 +101,14 @@ var compareTo = function() {
 //
     blogApp.controller('ArticlesController', ['$scope', '$routeParams', '$location', 'ArticleService', 
           
-           function($scope, $routeParams, $location, ArticleService, _) {
-             
-     
-
-                   $scope.articles = ArticleService.getArticles() 
-                   console.log($scope.articles);
+           function($scope, $routeParams, $location, ArticleService) {
+              //     $scope.users = ArticleService.getUsers()
+                   $scope.articles = ArticleService.getArticles()
+                 //  var obj = $scope.articles;
+               //    console.log(obj.username);
                   
              //console.log($scope.newPost.title);
-             $scope.addArticle = function(){
+              /*      $scope.addArticle = function(){
                         var new_id = 1 + $scope.articles[$scope.articles.length - 1].id
                         $scope.articles.push({
                           title: $scope.newPost.title,
@@ -125,54 +116,35 @@ var compareTo = function() {
                           data: $scope.newPost.text
                          
                         })
-                        //$scope.$apply();
-                       
+
                         console.log($scope.articles);
                         $scope.newPost = { }
                          $location.path('/');
                       }
-     
+            */
                 
     }])
   blogApp.controller('OtherController', ['$scope', 'ArticleService',
      function($scope) {
-      $scope.currentPage = 1;
-      $scope.pageSize = 10;
-      $scope.meals = [];
-
         $scope.pageChangeHandler = function(num) {
             console.log('going to page ' + num);
           };
      }])
 
 
- blogApp.controller('LoginController', ['$scope', '$location', '$routeParams', 'ArticleService',
-     function() {
-    var model = this;
-
-    model.message = "";
-
-    model.user = {
-      username: "",
-      password: "",
-      confirmPassword: ""
-    };
-
-    model.submit = function(isValid) {
-      console.log("h");
-      if (isValid) {
-        model.message = "Submitted " + model.user.username;
-        console.log("a");
-      } else {
-        model.message = "There are still invalid fields below";
-        console.log("b");
-      }
-    };
+ blogApp.controller('LoginController', ['$scope', '$location','$rootScope', 'ArticleService',
+     function($scope, $location, $rootScope, ArticleService)  {
+      $scope.login = function() {
+        $rootScope.loggedInUser = $scope.username;
+        $location.path("/blogs");
+        console.log("rootScope " + $rootScope.loggedInUser);
+      };
+  }])
   
-  }
-  ])
-  
+ // 
 
+  
+//
   blogApp.controller('ArticleDetailController', ['$scope', '$location', '$routeParams', 'ArticleService', 
           
            function($scope, $location, $routeParams, ArticleService) {
@@ -199,12 +171,17 @@ var compareTo = function() {
                   })
                 */
     }])
- /* 
-blogApp.controller('NewArtController', ['$scope','ArticleService',
-             function($scope, ArticleService) {
 
-              ArticleService.getArticles().success(function(data){
-                $scope.articles = data
+  /*
+      
+ */
+
+ 
+blogApp.controller('NewArtController', ['$scope', '$location','ArticleService',
+             function($scope, $location, ArticleService) {
+
+              $scope.articles = ArticleService.getArticles()
+                
                 // CHANGE
        
               $scope.addArticle = function(){
@@ -215,62 +192,187 @@ blogApp.controller('NewArtController', ['$scope','ArticleService',
                   data: $scope.newPost.text
                 })
                 $scope.newPost = { }
+                console.log(" PostsController $scope.posts" + $scope.articles);
+              $location.path('/');
               }
-              })
-              console.log(" PostsController $scope.posts" + $scope.articles);
+              
+              
     }]) 
-*/
+
+
+ 
 blogApp.factory('ArticleService', function(){
      pageChangeHandler = function(num) {
       console.log('meals page changed to ' + num);
   };
+      var infos = [ 
+                { 
+                  "id": 1,
+                  "firstname": "Homer", 
+                  "lastname": "Simpson",
+                  "username": "Homer",
+                  "email": "homer@simpson.com", 
+                  "password": "secret", 
+                  "articles": [ ]
+                },
+                {
+                  "id": 2,
+                  "firstname": "Bart", 
+                  "lastname": "Simpson",
+                  "username": "Bart",
+                  "email": "bart@simpson.com", 
+                  "password": "secret", 
+                  "articles": [ ]
+                },
+                {
+                  "id": 3,
+                  "firstname": "Marge", 
+                  "lastname": "Simpson",
+                  "username": "Marge",
+                  "email": "marge@simpson.com", 
+                  "password": "secret", 
+                  "articles": [ ]
+                }
+                ];
+        
+      var users = [ 
+                { 
+                  "firstname": "Homer", 
+                  "lastname": "Simpson",
+                  "username": "Homer",
+                  "email": "homer@simpson.com", 
+                  "password": "secret", 
+                  "artId": 1
+                },
+                {
+                  "firstname": "Bart", 
+                  "lastname": "Simpson",
+                  "username": "Bart",
+                  "email": "bart@simpson.com", 
+                  "password": "secret", 
+                  "artId": 2
+                },
+                {
+                  "firstname": "Marge", 
+                  "lastname": "Simpson",
+                  "username": "Marge",
+                  "email": "marge@simpson.com", 
+                  "password": "secret", 
+                  "artId": 3
+                }
+                ];
       var posts = [ 
                 { 
-                  "title": "first article", 
-                  "id": 1, 
-                  "data": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
-                  "date": "2012-04-23T18:25:43.511Z", 
-                  "by": "Dumitru brinza"
+                  title: "first article", 
+                  id: 1, 
+                  data: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
+                  date: "2012-04-23T18:25:43.511Z", 
+                  by: "Dumitru brinza",
+                  me: [
+                        {
+                            "user": "dada",
+                            "pass": "secret"
+                        }
+                        ]
                 },
                  { 
-                    "title": "2 article", 
-                    "id": 2, 
-                    "data": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
-                    "date": "2013-04-23T18:25:43.511Z", 
-                    "by": "Dumitru brinza2"
+                    title: "2 article", 
+                    id: 2, 
+                    data: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
+                    date: "2013-04-23T18:25:43.511Z", 
+                    by: "Dumitru brinza2",
+                    me: [
+                        {
+                            "user": "dada1",
+                            "pass": "secret1"
+                        }
+                        ]
                   },
                   { 
-                    "title": "3 article", 
-                    "id": 3, 
-                    "data": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
-                    "date": "2013-04-23T18:25:43.511Z", 
-                    "by": "Dumitru brinza3"
+                    title: "3 article", 
+                    id: 3, 
+                    data: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
+                    date: "2013-04-23T18:25:43.511Z", 
+                    by: "Dumitru brinza3",
+                    me: [
+                        {
+                            "user": "dada2",
+                            "pass": "secret2"
+                        }
+                        ]
                   },
                   { 
-                    "title": "4 article", 
-                    "id": 4, 
-                    "data": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
-                    "date": "2013-04-23T18:25:43.511Z", 
-                    "by": "Dumitru brinza4"
+                    title: "4 article", 
+                    id: 4, 
+                    data: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
+                    date: "2013-04-23T18:25:43.511Z", 
+                    by: "Dumitru brinza4",
+                    me: [
+                        {
+                            "user": "dada3",
+                            "pass": "secret3"
+                        }
+                        ]
                   }
-                ]
+                ];
          var api = {
              getArticles : function() {
-                return posts
+               var uService2 = [];
+                for(var key in infos) {
+                    var obj = infos[key]
+                    for(var prop in obj) {
+                      var obj2 = obj[prop]
+                      if (prop == "articles"){
+                        for (var any in obj2){
+                          uService2.push(obj2[any]) 
+                         // console.log(uService2)
+                        }
+                      }
+                    }
+                  //  if (posts.hasOwnProperty(key)) {
+                  //      console.log(posts[key]);
+                 //   }
+                }
+                  console.log(uService2)
+                  return uService2
+
+
+             //   return posts
              },
              getArticle : function(id) {
                 var result = null
-                posts.forEach(function(post){
-                   if (post.id == id) {
-                      result  = post
-                    }
-                } )
+           //     posts.forEach(function(post){
+           //        if (post.id == id) {
+            //          result  = post
+           //         }
+           //     } )
                 return result
+             },
+             getUsers : function(){
+              var uService = [];
+                for(var key in posts) {
+                    var obj = posts[key]
+                    for(var prop in obj) {
+                      var obj2 = obj[prop]
+                      if (prop == "me"){
+                        for (var any in obj2){
+                          uService.push(obj2[any]) 
+                        //  console.log(uService)
+                        }
+                      }
+                    }
+                  //  if (posts.hasOwnProperty(key)) {
+                  //      console.log(posts[key]);
+                 //   }
+                }
+                  return uService
+                 //return posts
              }
           }
           return api
  
     })
+ 
 
 /*
 var api = {

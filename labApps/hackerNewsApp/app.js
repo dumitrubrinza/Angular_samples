@@ -62,7 +62,7 @@ hackerApp.factory('PostsService', [function(){
                     id : 1,
                     link : 'http://www.bbc.com/news/world-asia-30896028',
                     username : 'jbloggs',
-                    comments : [],
+                    comments : ["sssssssssss"],
                     upvotes : 10
                   },
                  { 
