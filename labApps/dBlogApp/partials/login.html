@@ -9,7 +9,8 @@
           </div>
       </script>
        <h1>Log in!</h1>
-  <h3>{{ registration.message }}</h3> 
+       <div ng-show="error" class="alert alert-danger">{{error}}</div>
+  
       <form name="registrationForm" novalidate 
           ng-submit="login()">
        <div class="form-group">

@@ -20,9 +20,13 @@
                     <input type="text" placeholder="Search" ng-model="$parent.query" class="form-control">  
                 </div>
             </form>
+           
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/new-article">Add an Article</a></li>
-                <li><a href="#/login">Login</a></li>
+                <li ng-show="$root.globals.currentUser.loggedIn"> <a href=""> Hi {{$root.globals.currentUser.username}} !!</a></li>
+                <li ng-show="$root.globals.currentUser.loggedIn"><a href="#/new-article">Add an Article</a></li>
+                <li ng-hide="$root.globals.currentUser.loggedIn"><a href="#/login">Login</a></li> 
+                <li ng-hide="$root.globals.currentUser.loggedIn"><a href="#/signup">Sign Up</a></li> 
+                <li ng-show="$root.globals.currentUser.loggedIn"><a href="#/login" ng-click="">Log out</a></li>
             </ul>
         </div>
     </div>
